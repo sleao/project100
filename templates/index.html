@@ -1,0 +1,31 @@
+{% macro input(s) -%}
+<div class="site-card">
+  <h2><a href="{{s.url}}">{{s.site}}</a></h2>
+  {% if s.available %}
+  <p>Sim - {{s.price}}</p>
+  {% else %}
+  <p>Não</p>
+  {% endif %}
+</div>
+{%- endmacro %}
+
+<html>
+  <head>
+    <title>Tem PS5?</title>
+    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="title">Tem PS5?</h1>
+      <div class="content">
+        <div class="results">
+          {% for s in status %} {{ input(s) }} {% endfor %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
