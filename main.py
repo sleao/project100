@@ -15,10 +15,6 @@ manager = setup()
 
 @app.get("/", response_class=HTMLResponse)
 def index(request: Request):
-    # TO-DO: remove the run_all call from here
-    # as it slows downs the page load and it should
-    # run in the background like a cronjob
-    manager.run_all()
     status = manager.get_status()
     return templates.TemplateResponse(
         "index.html", {"request": request, "status": status}
