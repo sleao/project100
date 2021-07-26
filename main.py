@@ -15,9 +15,9 @@ manager = setup()
 
 @app.get("/", response_class=HTMLResponse)
 def index(request: Request):
-    status = manager.get_status()
+    status, lastupdate = manager.get_status()
     return templates.TemplateResponse(
-        "index.html", {"request": request, "status": status}
+        "index.html", {"request": request, "status": status, "lastupdate": lastupdate}
     )
 
 

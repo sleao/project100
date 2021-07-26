@@ -1,4 +1,7 @@
 from lib.modules import ScraperInterface, Kabum, Amazon
+from datetime import datetime
+
+TIME_FORMAT = "%B %d, %Y - %H:%M:%S"
 
 URL_PS5_KBM = r"https://www.kabum.com.br/produto/128245/console-sony-playstation-5-digital-edition-cfi-1014b"
 URL_PS5_AMZ = (
@@ -11,6 +14,7 @@ class ScraperManager:
 
     def __init__(self) -> None:
         self._modules: list[ScraperInterface] = []
+        self.lastUpdate = datetime.now()
 
     def _setup_module(self, module: ScraperInterface, url: str):
         """Instantiates a module and updates it"""
@@ -28,10 +32,14 @@ class ScraperManager:
         """Updates all the instantiated modules"""
         for mod in self._modules:
             mod.update()
+        self.lastUpdate = datetime.now()
 
     def get_status(self):
         """Returns both availability and price"""
-        return [(m.get_status()) for m in self._modules]
+        return (
+            [(m.get_status()) for m in self._modules],
+            self.lastUpdate.strftime(TIME_FORMAT),
+        )
 
     def get_avails(self):
         """Returns the item availability in every store"""
