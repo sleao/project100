@@ -1,10 +1,10 @@
-{% macro input(s) -%}
+{% macro card(s) -%}
 <div class="site-card">
-  <h2><a href="{{s.url}}">{{s.site}}</a></h2>
+  <h2><a href="{{s.url}}" target="_blank">{{s.site}}</a></h2>
   {% if s.available %}
-  <p>Sim - {{s.price}}</p>
+  <p>Sim! 🎉 - R${{s.price}} 💰</p>
   {% else %}
-  <p>Não</p>
+  <p>Não 😢</p>
   {% endif %}
 </div>
 {%- endmacro %}
@@ -12,6 +12,10 @@
 <html>
   <head>
     <title>Tem PS5?</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1"
+    />
     <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter"
@@ -23,9 +27,15 @@
       <h1 class="title">Tem PS5?</h1>
       <div class="content">
         <div class="results">
-          {% for s in status %} {{ input(s) }} {% endfor %}
+          {% for s in status %} {{ card(s) }} {% endfor %}
         </div>
       </div>
+    </div>
+    <div class="footer">
+      <p>
+        Made with 💖 by
+        <a href="https://github.com/sleao" target="_blank">Saulo :)</a>
+      </p>
     </div>
   </body>
 </html>
