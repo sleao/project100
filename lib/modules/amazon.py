@@ -2,8 +2,6 @@ import re
 from typing import Union
 from decimal import Decimal
 
-from bs4 import BeautifulSoup
-
 from .Interface import ScraperInterface
 
 
