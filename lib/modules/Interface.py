@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from decimal import Decimal
 from typing import Union
 from dataclasses import dataclass
 
@@ -18,7 +19,7 @@ class Status:
     site: str
     url: str
     available: bool
-    price: Union[float, None]
+    price: Union[Decimal, None]
 
 
 class ScraperInterface(ABC):
@@ -50,7 +51,7 @@ class ScraperInterface(ABC):
     def get_avail(self) -> bool:
         return self._avail
 
-    def get_price(self) -> float:
+    def get_price(self) -> Decimal:
         return self._price
 
     def _get_page(self) -> requests.Response:
